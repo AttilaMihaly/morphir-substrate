@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morphir Substrate - Triangular Dot Background</title>
+    <style>
+        :root {
+            --bg-1: #f7f9f7;
+            --bg-2: #eef4ef;
+            --dot: #2f4738;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at 20% 10%, var(--bg-1), var(--bg-2));
+            overflow: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            inset: 0;
+            display: block;
+        }
+
+        .label {
+            position: fixed;
+            left: 1rem;
+            bottom: 1rem;
+            padding: 0.45rem 0.7rem;
+            border-radius: 0.45rem;
+            background: rgba(255, 255, 255, 0.7);
+            color: #243228;
+            font-size: 0.82rem;
+            letter-spacing: 0.02em;
+            backdrop-filter: blur(2px);
+        }
+    </style>
+</head>
+
+<body>
+    <!--
+      Dots placed at every vertex of a triangular tiling.
+      Each vertex has exactly 6 neighbours at 60° intervals and equal distance.
+      Canvas is used so spacing is always pixel-perfect regardless of viewport.
+    -->
+    <canvas id="lattice" aria-hidden="true"></canvas>
+
+    <div class="label">Triangular tiling — dots at vertices</div>
+
+    <script>
+        const canvas = document.getElementById('lattice');
+        const ctx = canvas.getContext('2d');
+
+        // Triangle side length in CSS pixels.
+        const SPACING = 40;
+        // Vertical distance between rows: side * sin(60°) = side * sqrt(3)/2
+        const ROW_HEIGHT = SPACING * Math.sqrt(3) / 2;
+
+        const DOT_RADIUS = 2.5;
+        const DOT_COLOR = 'rgba(47, 71, 56, 0.5)';
+        const LINE_WIDTH = 0.8;
+        const LINE_COLOR = 'rgba(47, 71, 56, 0.25)';
+
+        // Rotation applied to the whole lattice.
+        const ROTATION = 30 * Math.PI / 180;
+
+        function draw() {
+            const W = canvas.width;
+            const H = canvas.height;
+            ctx.clearRect(0, 0, W, H);
+
+            // Rotate around the canvas centre so the pattern stays centred.
+            ctx.save();
+            ctx.translate(W / 2, H / 2);
+            ctx.rotate(ROTATION);
+            ctx.translate(-W / 2, -H / 2);
+
+            // Extend the grid enough that after rotation no corner is bare.
+            const diag = Math.ceil(Math.sqrt(W * W + H * H));
+            const rows = Math.ceil(diag / ROW_HEIGHT) + 4;
+            const cols = Math.ceil(diag / SPACING) + 4;
+            // Offset so the grid is centred on the canvas centre before rotation.
+            const originX = W / 2 - (cols / 2) * SPACING;
+            const originY = H / 2 - (rows / 2) * ROW_HEIGHT;
+
+            // Build vertex positions once so lines and dots share the same coords.
+            const pts = [];
+            for (let row = 0; row <= rows; row++) {
+                pts[row] = [];
+                const xOffset = (row % 2 !== 0) ? SPACING / 2 : 0;
+                for (let col = 0; col <= cols; col++) {
+                    pts[row][col] = {
+                        x: originX + col * SPACING + xOffset,
+                        y: originY + row * ROW_HEIGHT
+                    };
+                }
+            }
+
+            // Draw lines first so dots render on top.
+            // Each vertex connects to 3 forward neighbours to avoid drawing each edge twice:
+            //   right (+1, same row), lower-left and lower-right (next row).
+            ctx.strokeStyle = LINE_COLOR;
+            ctx.lineWidth = LINE_WIDTH;
+            ctx.lineCap = 'round';
+            for (let row = 0; row <= rows; row++) {
+                const isOdd = row % 2 !== 0;
+                for (let col = 0; col <= cols; col++) {
+                    const { x, y } = pts[row][col];
+
+                    // Right neighbour (same row).
+                    if (col < cols) {
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(pts[row][col + 1].x, pts[row][col + 1].y);
+                        ctx.stroke();
+                    }
+
+                    if (row < rows) {
+                        // Lower-left neighbour.
+                        const llCol = isOdd ? col : col - 1;
+                        if (llCol >= 0 && llCol <= cols) {
+                            ctx.beginPath();
+                            ctx.moveTo(x, y);
+                            ctx.lineTo(pts[row + 1][llCol].x, pts[row + 1][llCol].y);
+                            ctx.stroke();
+                        }
+                        // Lower-right neighbour.
+                        const lrCol = isOdd ? col + 1 : col;
+                        if (lrCol >= 0 && lrCol <= cols) {
+                            ctx.beginPath();
+                            ctx.moveTo(x, y);
+                            ctx.lineTo(pts[row + 1][lrCol].x, pts[row + 1][lrCol].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            // Draw dots on top of lines.
+            ctx.fillStyle = DOT_COLOR;
+            for (let row = 0; row <= rows; row++) {
+                for (let col = 0; col <= cols; col++) {
+                    const { x, y } = pts[row][col];
+                    ctx.beginPath();
+                    ctx.arc(x, y, DOT_RADIUS, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            ctx.restore();
+        }
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            draw();
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+    </script>
+</body>
+
+</html>
