@@ -85,6 +85,6 @@ Evaluates to the then-value when the condition is `true`, and to the else-value 
 | true      | 1    | 2    | 1      |
 | false     | 1    | 2    | 2      |
 
-## Type Class Instances
+## [Type Class](../concepts/type-class.md) Instances
 
 Boolean implements [Equality](equality.md): two Boolean values are equal when they are the same member.

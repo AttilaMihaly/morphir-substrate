@@ -18,6 +18,6 @@ Both values are the same.
 
 The first value is larger than the second.
 
-## Type Class Instances
+## [Type Class](../concepts/type-class.md) Instances
 
 Ordering Relation implements [Equality](equality.md): two Ordering Relation values are equal when they are the same member.

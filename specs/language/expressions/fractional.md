@@ -2,9 +2,9 @@
 
 ## Overview
 
-A type class for types supporting division and related operations with non-integer results. Extends [Number](number.md).
+A [type class](../concepts/type-class.md) for [types](../concepts/type.md) supporting division and related operations with non-integer results. Extends [Number](number.md).
 
-### Extended Type Classes
+### Extended [Type Classes](../concepts/type-class.md)
 
 - [Number](number.md)
 
@@ -27,7 +27,7 @@ Divides one value by another, producing a fractional result. The result may be i
 | 5.0      | 5.0     | 1.0    |
 | 0.0      | 3.0     | 0.0    |
 
-## Type Class Members
+## [Type Class](../concepts/type-class.md) Members
 
 - [Floating-Point](floating-point.md)
 - [Decimal](decimal.md)

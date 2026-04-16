@@ -9,13 +9,13 @@ A Collection is a parametric type over an element type `T` that holds zero or mo
 - **minimum cardinality** ([Integer][int]) — the minimum number of elements the collection must contain.
 - **maximum cardinality** ([Integer][int], optional) — the maximum number of elements the collection may contain.
 
-## Parameters
+## [Parameters](../concepts/parameter.md)
 
 | Name | Description                                  |
 | ---- | -------------------------------------------- |
 | `T`  | The type of elements held in the collection. |
 
-## Attributes
+## [Attributes](../concepts/attribute.md)
 
 ### Multiplicity
 
@@ -282,9 +282,9 @@ _[Derived][der]._ Precondition: element type implements [Number][num]; minimum c
 | [2, 4]     | 3      |
 | [5]        | 5      |
 
-## Type Class Instances
+## [Type Class](../concepts/type-class.md) Instances
 
-Collection does not itself implement a type class. The applicability of individual operations depends on the element type's type class instances and the collection's attribute values, as stated in each operation's preconditions.
+Collection does not itself implement a [type class](../concepts/type-class.md). The applicability of individual operations depends on the element type's type class instances and the collection's [attribute](../concepts/attribute.md) values, as stated in each operation's preconditions.
 
 [bool]: boolean.md
 [col-iter]: collection-iteration-order.md

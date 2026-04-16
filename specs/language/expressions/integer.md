@@ -13,7 +13,7 @@ Represents whole numbers, optionally with fixed precision and signedness. Used f
 
 - Any whole number within the representable range determined by `size in bits` and `signed`.
 
-## Type Class Instances
+## [Type Class](../concepts/type-class.md) Instances
 
 - [Number](number.md)
 - [Equality](equality.md)

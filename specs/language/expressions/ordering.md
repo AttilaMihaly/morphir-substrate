@@ -1,8 +1,8 @@
-# Ordering Type Class
+# Ordering [Type Class](../concepts/type-class.md)
 
 ## Overview
 
-The Ordering type class defines operations for comparing values to determine their relative order. It extends [Equality][eq]: any type with an ordering also supports equality comparison.
+The Ordering [type class](../concepts/type-class.md) defines operations for comparing values to determine their relative order. It extends [Equality][eq]: any [type](../concepts/type.md) with an ordering also supports equality comparison.
 
 ## Operations
 

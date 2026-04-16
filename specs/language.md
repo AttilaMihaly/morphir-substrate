@@ -2,24 +2,7 @@
 
 This specification organizes the language into modular, human-readable markdown files. Each module describes a distinct aspect of the language, focusing on clarity and traceability.
 
-## Type Structure
-
-Types may carry **attributes** and **parameters**. These two mechanisms serve distinct purposes.
-
-### Parameters
-
-A _parameter_ is a type supplied at instantiation time. A type that declares one or more parameters is called a _parametric type_ (analogous to generics). The parameter name acts as a placeholder for the concrete element type used in the type's operations.
-
-Example: `Collection` is parametric over an element type `T`. Every operation that accepts or returns an element works with `T` rather than a fixed type.
-
-### Attributes
-
-An _attribute_ is a value that configures a type instance. Attributes are fixed at the point where the type is used; they are not types themselves. An attribute's type may be:
-
-- A primitive type already defined in the language (e.g., [Boolean](language/expressions/boolean.md), [Integer](language/expressions/integer.md)).
-- A dedicated attribute type defined in its own module, named after the type and attribute it belongs to (e.g., `Collection Multiplicity`). Such attribute types appear in the [Expressions](#expressions) section and follow the same module conventions as any other type.
-
-When an attribute type has only a small, fixed set of named values, it is described as an enumerated type with one member value per option.
+## [Concepts](language/concepts/)
 
 ## [Expressions](language/expressions/)
 

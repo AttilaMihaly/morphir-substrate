@@ -12,7 +12,7 @@ Represents real numbers using a fixed-size binary format with a sign, exponent, 
 
 - Any real number representable within the chosen format, including special values (e.g., infinity, NaN).
 
-## Type Class Instances
+## [Type Class](../concepts/type-class.md) Instances
 
 - [Number](number.md)
 - [Fractional](fractional.md)

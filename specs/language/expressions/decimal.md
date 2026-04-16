@@ -13,7 +13,7 @@ Represents real numbers using a base-10 format with explicit precision and scale
 
 - Any decimal number representable within the specified precision and scale.
 
-## Type Class Instances
+## [Type Class](../concepts/type-class.md) Instances
 
 - [Number](number.md)
 - [Fractional](fractional.md)
