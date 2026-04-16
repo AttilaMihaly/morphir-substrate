@@ -66,83 +66,72 @@
 
         // Triangle side length in CSS pixels.
         const SPACING = 40;
-        // Vertical distance between rows: side * sin(60°) = side * sqrt(3)/2
-        const ROW_HEIGHT = SPACING * Math.sqrt(3) / 2;
+        // Horizontal distance between columns: side * sqrt(3)/2
+        const COL_WIDTH = SPACING * Math.sqrt(3) / 2;
 
         const DOT_RADIUS = 2.5;
         const DOT_COLOR = 'rgba(47, 71, 56, 0.5)';
         const LINE_WIDTH = 0.8;
         const LINE_COLOR = 'rgba(47, 71, 56, 0.25)';
 
-        // Rotation applied to the whole lattice.
-        const ROTATION = 30 * Math.PI / 180;
-
         function draw() {
             const W = canvas.width;
             const H = canvas.height;
             ctx.clearRect(0, 0, W, H);
 
-            // Rotate around the canvas centre so the pattern stays centred.
-            ctx.save();
-            ctx.translate(W / 2, H / 2);
-            ctx.rotate(ROTATION);
-            ctx.translate(-W / 2, -H / 2);
-
-            // Extend the grid enough that after rotation no corner is bare.
-            const diag = Math.ceil(Math.sqrt(W * W + H * H));
-            const rows = Math.ceil(diag / ROW_HEIGHT) + 4;
-            const cols = Math.ceil(diag / SPACING) + 4;
-            // Offset so the grid is centred on the canvas centre before rotation.
-            const originX = W / 2 - (cols / 2) * SPACING;
-            const originY = H / 2 - (rows / 2) * ROW_HEIGHT;
+            const cols = Math.ceil(W / COL_WIDTH) + 4;
+            const rows = Math.ceil(H / SPACING) + 4;
+            const originX = W / 2 - (cols / 2) * COL_WIDTH;
+            const originY = H / 2 - (rows / 2) * SPACING;
 
             // Build vertex positions once so lines and dots share the same coords.
+            // Odd columns are shifted down by half a spacing.
             const pts = [];
             for (let row = 0; row <= rows; row++) {
                 pts[row] = [];
-                const xOffset = (row % 2 !== 0) ? SPACING / 2 : 0;
                 for (let col = 0; col <= cols; col++) {
+                    const yOffset = (col % 2 !== 0) ? SPACING / 2 : 0;
                     pts[row][col] = {
-                        x: originX + col * SPACING + xOffset,
-                        y: originY + row * ROW_HEIGHT
+                        x: originX + col * COL_WIDTH,
+                        y: originY + row * SPACING + yOffset
                     };
                 }
             }
 
             // Draw lines first so dots render on top.
             // Each vertex connects to 3 forward neighbours to avoid drawing each edge twice:
-            //   right (+1, same row), lower-left and lower-right (next row).
+            //   down (same column), upper-right and lower-right (next column).
             ctx.strokeStyle = LINE_COLOR;
             ctx.lineWidth = LINE_WIDTH;
             ctx.lineCap = 'round';
             for (let row = 0; row <= rows; row++) {
-                const isOdd = row % 2 !== 0;
                 for (let col = 0; col <= cols; col++) {
                     const { x, y } = pts[row][col];
+                    const isOddCol = col % 2 !== 0;
 
-                    // Right neighbour (same row).
-                    if (col < cols) {
+                    // Down neighbour (same column).
+                    if (row < rows) {
                         ctx.beginPath();
                         ctx.moveTo(x, y);
-                        ctx.lineTo(pts[row][col + 1].x, pts[row][col + 1].y);
+                        ctx.lineTo(pts[row + 1][col].x, pts[row + 1][col].y);
                         ctx.stroke();
                     }
 
-                    if (row < rows) {
-                        // Lower-left neighbour.
-                        const llCol = isOdd ? col : col - 1;
-                        if (llCol >= 0 && llCol <= cols) {
+                    if (col < cols) {
+                        // Upper-right neighbour.
+                        const urRow = isOddCol ? row : row - 1;
+                        if (urRow >= 0 && urRow <= rows) {
                             ctx.beginPath();
                             ctx.moveTo(x, y);
-                            ctx.lineTo(pts[row + 1][llCol].x, pts[row + 1][llCol].y);
+                            ctx.lineTo(pts[urRow][col + 1].x, pts[urRow][col + 1].y);
                             ctx.stroke();
                         }
                         // Lower-right neighbour.
-                        const lrCol = isOdd ? col + 1 : col;
-                        if (lrCol >= 0 && lrCol <= cols) {
+                        const lrRow = isOddCol ? row + 1 : row;
+                        if (lrRow >= 0 && lrRow <= rows) {
                             ctx.beginPath();
                             ctx.moveTo(x, y);
-                            ctx.lineTo(pts[row + 1][lrCol].x, pts[row + 1][lrCol].y);
+                            ctx.lineTo(pts[lrRow][col + 1].x, pts[lrRow][col + 1].y);
                             ctx.stroke();
                         }
                     }
@@ -159,8 +148,6 @@
                     ctx.fill();
                 }
             }
-
-            ctx.restore();
         }
 
         function resize() {

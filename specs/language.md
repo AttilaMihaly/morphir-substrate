@@ -16,34 +16,12 @@ Example: `Collection` is parametric over an element type `T`. Every operation th
 
 An _attribute_ is a value that configures a type instance. Attributes are fixed at the point where the type is used; they are not types themselves. An attribute's type may be:
 
-- A primitive type already defined in the language (e.g., [Boolean](language/boolean.md), [Integer](language/integer.md)).
-- A dedicated attribute type defined in its own module, named after the type and attribute it belongs to (e.g., `Collection Multiplicity`). Such attribute types appear in the [Types](#types) list and follow the same module conventions as any other type.
+- A primitive type already defined in the language (e.g., [Boolean](language/expressions/boolean.md), [Integer](language/expressions/integer.md)).
+- A dedicated attribute type defined in its own module, named after the type and attribute it belongs to (e.g., `Collection Multiplicity`). Such attribute types appear in the [Expressions](#expressions) section and follow the same module conventions as any other type.
 
 When an attribute type has only a small, fixed set of named values, it is described as an enumerated type with one member value per option.
 
-## Modules
-
-### Types
-
-Concrete data types with named member values.
-
-- [Boolean](language/boolean.md) — a two-valued type representing truth: `true` and `false`.
-- [Ordering Relation](language/ordering-relation.md) — a three-valued type representing the outcome of a comparison: `Less`, `Equal`, or `Greater`.
-- [Integer](language/integer.md) — whole numbers with optional fixed precision and signedness.
-- [Floating-Point](language/floating-point.md) — real numbers in binary format with fixed size.
-- [Decimal](language/decimal.md) — real numbers in base-10 format with explicit precision and scale.
-- [Collection](language/collection.md) — a parametric type over an element type `T` for holding elements with configurable multiplicity, iteration order, and cardinality constraints.
-- [Collection Multiplicity](language/collection-multiplicity.md) — attribute type for [Collection](language/collection.md) governing whether duplicate elements are permitted.
-- [Collection Iteration Order](language/collection-iteration-order.md) — attribute type for [Collection](language/collection.md) governing the sequence in which elements are visited.
-
-### Type Classes
-
-Shared interfaces that define operations over types. A type _instances_ a type class by implementing its [Required](#required) operations.
-
-- [Equality](language/equality.md) — equality and inequality comparison.
-- [Ordering](language/ordering.md) — relative ordering via a three-way [compare](language/ordering.md#compare) operation.
-- [Number](language/number.md) — arithmetic operations for numeric types.
-- [Fractional](language/fractional.md) — division and related operations for non-integer types.
+## [Expressions](language/expressions/)
 
 ## Operations
 
@@ -66,6 +44,20 @@ must reference the required operation(s) they are defined in terms of.
 
 ## Markdown Conventions
 
+### Syntax Policy
+
+Modules use native markdown syntax wherever possible. Extended syntax is
+permitted only when it is broadly supported, with GitHub-flavored Markdown
+as the primary compatibility target. This keeps modules readable and
+renderable with standard tooling.
+
+### Links as Primary Enrichment
+
+Links are the principal mechanism for attaching semantic meaning to a
+document. Every reference to a type, operation, or module should be a
+relative markdown link to its definition. This turns plain prose into a
+navigable semantic graph that both humans and tools can traverse.
+
 ### Link References
 
 When the same hyperlink target appears multiple times in a module, prefer
@@ -86,6 +78,48 @@ Returns a [Boolean][bool] value.
 
 This is not mandatory for links that appear only once, but is encouraged
 whenever a target is referenced two or more times in the same file.
+
+### Document Inclusion
+
+A heading whose entire inline content is a single link acts as an
+**inclusion heading**: the tooling embeds the linked content as a
+subsection, adjusting heading levels to nest correctly. This lets authors
+split a growing document across files without losing a unified heading
+hierarchy.
+
+#### Sibling Convention
+
+A file and a directory that share a stem name form a pair: `language.md`
+and `language/` are siblings. An inclusion heading may only reference
+**direct children** of the file's paired directory. Links that do not
+satisfy this rule — parent traversals, grandchild paths, external URLs —
+are treated as ordinary navigational links without errors or warnings.
+
+For example, `language/expressions/` is a direct child of `language/` and
+qualifies, as does any individual file such as `language/expressions/boolean.md`.
+
+#### File Inclusion
+
+The link target is a markdown file:
+
+```markdown
+### [Boolean](language/expressions/boolean.md)
+```
+
+The file's contents are inserted under the heading with heading levels
+adjusted to nest correctly.
+
+#### Directory Inclusion
+
+The link target is a subdirectory:
+
+```markdown
+### [Types](language/types/)
+```
+
+Every markdown file in the directory is included as a subsection, ordered
+alphabetically by filename. Numeric prefixes (e.g., `01-boolean.md`,
+`02-integer.md`) control ordering. The same rules apply recursively.
 
 ## Alternative Formats
 
@@ -119,12 +153,12 @@ This mirrors function application in a readable, non-syntactic form.
 
 ### Example
 
-- [Add](language/number.md#addition)
-  - [Multiply](language/number.md#multiplication)
+- [Add](language/expressions/number.md#addition)
+  - [Multiply](language/expressions/number.md#multiplication)
     - `unit_price`
     - `quantity`
   - `tax`
 
 This reads as: add the result of multiplying `unit_price` by `quantity` to `tax`.
 
-Leaf values (e.g., `unit_price`) refer to named inputs or constants defined elsewhere in the user module. A [Boolean](language/boolean.md) value can be used as a condition in the [If-Then-Else](language/boolean.md#if-then-else) control-flow construct.
+Leaf values (e.g., `unit_price`) refer to named inputs or constants defined elsewhere in the user module. A [Boolean](language/expressions/boolean.md) value can be used as a condition in the [If-Then-Else](language/expressions/boolean.md#if-then-else) control-flow construct.

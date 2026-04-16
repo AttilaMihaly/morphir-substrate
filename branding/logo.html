@@ -35,49 +35,42 @@
     <!--
     4×4 triangular lattice construction grid.
     "4×4" means 4 triangle-intervals in each direction → 5×5 = 25 nodes.
-    Lattice is rotated 30° so embedded hexagons have a pointy top/bottom.
-    Node numbers run left-to-right, top-to-bottom (before rotation).
+    Odd columns are shifted down by half a spacing so that the embedded
+    hexagons are pointy-top without any rotation.
+    Node numbers run left-to-right, top-to-bottom.
   -->
     <svg id="grid" width="600" height="600" viewBox="-300 -300 600 600"
         aria-label="4 by 4 triangular lattice construction grid with 25 numbered nodes"></svg>
 
-    <div class="caption">4×4 triangular lattice — 25 nodes — rotate 30°</div>
+    <div class="caption">4×4 triangular lattice — 25 nodes</div>
 
     <script>
         // ── Lattice parameters ────────────────────────────────────────────────────
-        const SPACING = 80;                          // side length of each equilateral triangle (px)
-        const ROW_HEIGHT = SPACING * Math.sqrt(3) / 2; // ≈ 69.28 px  (= SPACING × sin 60°)
-        const ROWS = 5;                           // 5 node-rows  → 4 row-intervals
-        const COLS = 5;                           // 5 node-cols  → 4 col-intervals
+        const SPACING = 80;                             // side length of each equilateral triangle (px)
+        const COL_WIDTH = SPACING * Math.sqrt(3) / 2;  // ≈ 69.28 px  (= SPACING × √3/2)
+        const ROWS = 5;                                 // 5 node-rows  → 4 row-intervals
+        const COLS = 5;                                 // 5 node-cols  → 4 col-intervals
         const DOT_RADIUS = 16;                          // px
-        const ROTATION = 30;                          // degrees — pointy-top hexagon orientation
 
         const NS = 'http://www.w3.org/2000/svg';
         const svg = document.getElementById('grid');
 
-        // Centre the unrotated grid on the SVG origin (0, 0).
-        //   Even rows span x ∈ [0, (COLS-1)·SPACING]
-        //   Odd  rows span x ∈ [SPACING/2, (COLS-1)·SPACING + SPACING/2]
-        //   Combined   x ∈ [0, (COLS-1)·SPACING + SPACING/2]
-        const gridW = (COLS - 1) * SPACING + SPACING / 2; // 360
-        const gridH = (ROWS - 1) * ROW_HEIGHT;             // ≈ 277.13
-        const shiftX = gridW / 2;   // 180
-        const shiftY = gridH / 2;   // ≈ 138.56
-
-        // Outer group — applies the 30° rotation to the whole lattice.
-        const gRotate = document.createElementNS(NS, 'g');
-        gRotate.setAttribute('transform', `rotate(${ROTATION})`);
-        svg.appendChild(gRotate);
+        // Centre the grid on the SVG origin (0, 0).
+        const gridW = (COLS - 1) * COL_WIDTH;                  // ≈ 277.13
+        const gridH = (ROWS - 1) * SPACING + SPACING / 2;     // 360
+        const shiftX = gridW / 2;   // ≈ 138.56
+        const shiftY = gridH / 2;   // 180
 
         // ── Pass 1: compute all node positions into a lookup map ─────────────────
+        // Odd columns are shifted down by SPACING/2.
         const nodePos = new Map(); // nodeId → { cx, cy }
         let nodeId = 1;
         for (let row = 0; row < ROWS; row++) {
-            const xShift = (row % 2 !== 0) ? SPACING / 2 : 0;
             for (let col = 0; col < COLS; col++) {
+                const yShift = (col % 2 !== 0) ? SPACING / 2 : 0;
                 nodePos.set(nodeId, {
-                    cx: col * SPACING + xShift - shiftX,
-                    cy: row * ROW_HEIGHT - shiftY
+                    cx: col * COL_WIDTH - shiftX,
+                    cy: row * SPACING + yShift - shiftY
                 });
                 nodeId++;
             }
@@ -85,8 +78,8 @@
 
         // ── Pass 2: draw polylines ───────────────────────────────────────────────
         const polylines = [
-            { nodes: [3, 2, 6, 12, 13], color: '#16A2DC' },
-            { nodes: [7, 8, 14, 18, 17], color: '#F26A21' },
+            { nodes: [4, 3, 2, 7, 13], color: '#16A2DC' },
+            { nodes: [8, 9, 14, 18, 12], color: '#F26A21' },
         ];
 
         for (const { nodes, color } of polylines) {
@@ -104,7 +97,7 @@
             pl.setAttribute('stroke-width', (DOT_RADIUS * 2 * 1.2).toFixed(1));
             pl.setAttribute('stroke-linecap', 'round');
             pl.setAttribute('stroke-linejoin', 'round');
-            gRotate.appendChild(pl);
+            svg.appendChild(pl);
         }
     </script>
 </body>

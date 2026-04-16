@@ -1,10 +1,5 @@
 # Vision Document: An LLM-Native Executable Specification Language
 
-_Version 0.1_\
-_Generated on 2026-02-27 (UTC)_
-
----
-
 ## 1. Executive Summary
 
 This project envisions a new kind of programming language: an
@@ -31,6 +26,12 @@ The language prioritizes meaning over form. Structure emerges from semantic
 intent --- what something means matters more than how it is written. There is
 no rigid grammar or formal syntax; the canonical representation is markdown
 enriched with natural language.
+
+The language uses native markdown syntax wherever possible. Extended syntax
+is permitted only when it is broadly supported by major rendering tools,
+with GitHub-flavored Markdown as the primary compatibility target. This
+keeps the specification approachable: any contributor --- human or
+machine --- can read, edit, and render it with standard tooling.
 
 Alternative intermediate formats are permitted when markdown alone is
 insufficient for precision or conciseness. They may appear as code blocks
@@ -67,6 +68,13 @@ structured substrate that enables:
 - Consistency checking
 - Dependency validation
 - Tooling support
+
+The markdown documents serve as an all-encompassing semantic context for
+human and machine contributors. Links are the primary enrichment
+mechanism: they associate types, operations, and provenance with terms and
+structures that would otherwise be plain text. All available markdown
+features --- headings, tables, lists, links, footnotes --- are used to
+carry semantic information within the document.
 
 The markdown format is intentionally permissive. Structure is defined by
 relative heading depth (e.g., a test cases section must appear under its
@@ -254,11 +262,11 @@ specification fragment.
 **Document enrichment** augments the existing markdown source files with
 type information derived from inference. Enrichment is non-destructive: it
 does not alter the authored prose or table content. Instead, it attaches
-inferred type annotations as **footnotes**, using the caret notation of
-extended Markdown syntax (e.g., `^[inferred type: Boolean]`). These inline
-footnotes appear at the precise location of the annotated term or
-expression, keeping type information co-located with the content it
-describes while remaining visually unobtrusive in rendered output.
+inferred type annotations as **reference-style footnotes** supported by
+GitHub-flavored Markdown (e.g., `[^type-price]` at the annotated term,
+with `[^type-price]: inferred type: Decimal` at the end of the file).
+Footnotes keep type information co-located with the content they describe
+while remaining visually unobtrusive in rendered output.
 
 This approach preserves full round-trip fidelity: the enriched document
 remains valid, human-readable markdown, and the footnotes serve as

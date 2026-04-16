@@ -37,12 +37,19 @@ Describe a shared interface analogous to Haskell type classes, without type theo
 - Mark each operation as _Required_ or _Derived_.
 - Derived operations must reference the required operation(s) they are defined in terms of.
 - Each operation section includes a truth table or example table that provides full-coverage test cases.
-- All operations that return a truth value must declare [Boolean](../specs/language/boolean.md) as the return type.
+- All operations that return a truth value must declare [Boolean](../specs/language/expressions/boolean.md) as the return type.
 
 ## Cross-References
 
 - Always use relative markdown links when referencing other modules (e.g., `[Boolean](boolean.md)`).
 - Use anchor links when referencing a specific section within a module (e.g., `[Less](ordering-relation.md#less)`).
+- Every reference to a type, operation, or module in prose should be a link to its definition. Links are the primary mechanism for attaching semantic meaning to the document.
+
+## Markdown Syntax
+
+- Use native markdown syntax wherever possible.
+- Only use extended syntax that is broadly supported, with GitHub-flavored Markdown (GFM) as the primary compatibility target.
+- Do not use features unsupported by GitHub rendering (e.g., inline footnotes with `^[...]`). Use reference-style footnotes (`[^label]`) when footnotes are needed.
 
 ## Content Guidelines
 

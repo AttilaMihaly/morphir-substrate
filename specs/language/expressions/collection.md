@@ -11,9 +11,9 @@ A Collection is a parametric type over an element type `T` that holds zero or mo
 
 ## Parameters
 
-| Name | Description                                     |
-| ---- | ----------------------------------------------- |
-| `T`  | The type of elements held in the collection.    |
+| Name | Description                                  |
+| ---- | -------------------------------------------- |
+| `T`  | The type of elements held in the collection. |
 
 ## Attributes
 
@@ -79,11 +79,11 @@ _[Required][req]._ Returns a new collection of the same multiplicity and iterati
 
 #### Test cases
 
-| Collection | Function          | Output    |
-| ---------- | ----------------- | --------- |
-| [1, 2, 3]  | add 1 to element  | [2, 3, 4] |
-| []         | add 1 to element  | []        |
-| [2, 2, 3]  | add 1 to element  | [3, 3, 4] |
+| Collection | Function         | Output    |
+| ---------- | ---------------- | --------- |
+| [1, 2, 3]  | add 1 to element | [2, 3, 4] |
+| []         | add 1 to element | []        |
+| [2, 2, 3]  | add 1 to element | [3, 3, 4] |
 
 ### Filter
 
@@ -167,12 +167,12 @@ _[Required][req]._ Precondition: a key function and a [Compare][compare] express
 
 #### Test cases
 
-| Collection      | Key function            | Output         |
-| --------------- | ----------------------- | -------------- |
-| [3, 1, 2]       | element itself          | [1, 2, 3]      |
-| [2, 2, 1]       | element itself          | [1, 2, 2]      |
-| []              | element itself          | []             |
-| [(b,1), (a,2)]  | first component of pair | [(a,2), (b,1)] |
+| Collection     | Key function            | Output         |
+| -------------- | ----------------------- | -------------- |
+| [3, 1, 2]      | element itself          | [1, 2, 3]      |
+| [2, 2, 1]      | element itself          | [1, 2, 2]      |
+| []             | element itself          | []             |
+| [(b,1), (a,2)] | first component of pair | [(a,2), (b,1)] |
 
 ### Then By
 
@@ -180,10 +180,10 @@ _[Derived][der]._ Precondition: a preceding [Sort By](#sort-by) or Then By has e
 
 #### Test cases
 
-| Collection              | Primary key             | Secondary key            | Output                  |
-| ----------------------- | ----------------------- | ------------------------ | ----------------------- |
-| [(a,2), (a,1), (b,1)]   | first component of pair | second component of pair | [(a,1), (a,2), (b,1)]   |
-| [(b,2), (a,1), (a,2)]   | first component of pair | second component of pair | [(a,1), (a,2), (b,2)]   |
+| Collection            | Primary key             | Secondary key            | Output                |
+| --------------------- | ----------------------- | ------------------------ | --------------------- |
+| [(a,2), (a,1), (b,1)] | first component of pair | second component of pair | [(a,1), (a,2), (b,1)] |
+| [(b,2), (a,1), (a,2)] | first component of pair | second component of pair | [(a,1), (a,2), (b,2)] |
 
 ### Min
 
@@ -290,11 +290,11 @@ Collection does not itself implement a type class. The applicability of individu
 [col-iter]: collection-iteration-order.md
 [col-mult]: collection-multiplicity.md
 [compare]: ordering.md#compare
-[der]: ../language.md#derived
+[der]: ../../language.md#derived
 [eq]: equality.md
 [eq-equal]: equality.md#equal
 [int]: integer.md
 [num]: number.md
 [or-equal]: ordering-relation.md#equal
 [ord]: ordering.md
-[req]: ../language.md#required
+[req]: ../../language.md#required

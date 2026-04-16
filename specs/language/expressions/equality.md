@@ -10,7 +10,7 @@ All operations return a [Boolean](boolean.md) value.
 
 ### Equal
 
-_[Required](../language.md#required)._ Returns true if both values are the same. Must be implemented by any type that instances this type class.
+_[Required](../../language.md#required)._ Returns true if both values are the same. Must be implemented by any type that instances this type class.
 
 #### Test cases
 
@@ -23,7 +23,7 @@ _[Required](../language.md#required)._ Returns true if both values are the same.
 
 ### Not Equal
 
-_[Derived](../language.md#derived)._ Returns true if values are different. Defined as [NOT](boolean.md#not)`(a == b)`; does not need to be separately implemented.
+_[Derived](../../language.md#derived)._ Returns true if values are different. Defined as [NOT](boolean.md#not)`(a == b)`; does not need to be separately implemented.
 
 #### Test cases
 

@@ -14,11 +14,11 @@ _[Required][req]._ Returns an [Ordering Relation][or] representing the relations
 
 #### Test cases
 
-| Input A | Input B | Output                  |
-| ------- | ------- | ----------------------- |
-| 1       | 2       | [Less][or-less]         |
-| 2       | 2       | [Equal][or-equal]       |
-| 3       | 2       | [Greater][or-greater]   |
+| Input A | Input B | Output                |
+| ------- | ------- | --------------------- |
+| 1       | 2       | [Less][or-less]       |
+| 2       | 2       | [Equal][or-equal]     |
+| 3       | 2       | [Greater][or-greater] |
 
 ### Less Than
 
@@ -69,10 +69,10 @@ _[Derived][der]._ Returns true when `compare(a, b)` is not [Less][or-less].
 | 3       | 2       | true   |
 
 [bool]: boolean.md
-[der]: ../language.md#derived
+[der]: ../../language.md#derived
 [eq]: equality.md
 [or]: ordering-relation.md
 [or-equal]: ordering-relation.md#equal
 [or-greater]: ordering-relation.md#greater
 [or-less]: ordering-relation.md#less
-[req]: ../language.md#required
+[req]: ../../language.md#required
