@@ -9,11 +9,11 @@ Represents whole numbers, optionally with fixed precision and signedness. Used f
 - **size in bits** (optional): If set, restricts the integer to a fixed bit width (e.g., 8, 16, 32, 64). If unset, the integer is arbitrary precision.
 - **signed** ([Boolean](boolean.md)): If `true`, the integer can represent negative numbers; if `false`, only non-negative numbers.
 
-## Member Values
+## [Member Values](../concepts/type.md#member-values)
 
 - Any whole number within the representable range determined by `size in bits` and `signed`.
 
-## [Type Class](../concepts/type-class.md) Instances
+## [Type Class Instances](../concepts/type.md#type-class-instances)
 
 - [Number](number.md)
 - [Equality](equality.md)

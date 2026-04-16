@@ -1,11 +1,11 @@
-# Collection Iteration Order
+# Collection Iteration Order [Type](../concepts/type.md)
 
 ## Overview
 
 An attribute type that governs the sequence in which elements are visited
 during iteration of a [Collection](collection.md).
 
-## Member Values
+## [Member Values](../concepts/type.md#member-values)
 
 - **none** — no iteration order is guaranteed.
 - **insertion** — elements are visited in the order they were added.

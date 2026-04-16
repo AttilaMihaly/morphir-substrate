@@ -1,4 +1,4 @@
-# Collection
+# Collection [Type](../concepts/type.md)
 
 ## Overview
 
@@ -282,7 +282,7 @@ _[Derived][der]._ Precondition: element type implements [Number][num]; minimum c
 | [2, 4]     | 3      |
 | [5]        | 5      |
 
-## [Type Class](../concepts/type-class.md) Instances
+## [Type Class Instances](../concepts/type.md#type-class-instances)
 
 Collection does not itself implement a [type class](../concepts/type-class.md). The applicability of individual operations depends on the element type's type class instances and the collection's [attribute](../concepts/attribute.md) values, as stated in each operation's preconditions.
 

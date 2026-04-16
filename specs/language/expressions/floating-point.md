@@ -1,4 +1,4 @@
-# Floating-Point
+# Floating-Point [Type](../concepts/type.md)
 
 ## Overview
 
@@ -8,11 +8,11 @@ Represents real numbers using a fixed-size binary format with a sign, exponent, 
 
 - **size in bits** (required): Specifies the bit width of the floating-point representation (e.g., 32 for single precision, 64 for double precision).
 
-## Member Values
+## [Member Values](../concepts/type.md#member-values)
 
 - Any real number representable within the chosen format, including special values (e.g., infinity, NaN).
 
-## [Type Class](../concepts/type-class.md) Instances
+## [Type Class Instances](../concepts/type.md#type-class-instances)
 
 - [Number](number.md)
 - [Fractional](fractional.md)
