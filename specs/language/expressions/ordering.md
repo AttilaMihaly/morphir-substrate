@@ -8,7 +8,7 @@ The Ordering [type class](../concepts/type-class.md) defines operations for comp
 
 Relational operations return a [Boolean][bool] value.
 
-### Compare
+### Compare [Operation](../concepts/operation.md)
 
 _[Required][req]._ Returns an [Ordering Relation][or] representing the relationship between the first and second value. All other ordering operations are derived from this.
 
@@ -20,7 +20,7 @@ _[Required][req]._ Returns an [Ordering Relation][or] representing the relations
 | 2       | 2       | [Equal][or-equal]     |
 | 3       | 2       | [Greater][or-greater] |
 
-### Less Than
+### Less Than [Operation](../concepts/operation.md)
 
 _[Derived][der]._ Returns true when `compare(a, b)` is [Less][or-less].
 
@@ -32,7 +32,7 @@ _[Derived][der]._ Returns true when `compare(a, b)` is [Less][or-less].
 | 2       | 2       | false  |
 | 3       | 2       | false  |
 
-### Greater Than
+### Greater Than [Operation](../concepts/operation.md)
 
 _[Derived][der]._ Returns true when `compare(a, b)` is [Greater][or-greater].
 
@@ -44,7 +44,7 @@ _[Derived][der]._ Returns true when `compare(a, b)` is [Greater][or-greater].
 | 2       | 2       | false  |
 | 3       | 2       | true   |
 
-### Less Than or Equal
+### Less Than or Equal [Operation](../concepts/operation.md)
 
 _[Derived][der]._ Returns true when `compare(a, b)` is not [Greater][or-greater].
 
@@ -56,7 +56,7 @@ _[Derived][der]._ Returns true when `compare(a, b)` is not [Greater][or-greater]
 | 2       | 2       | true   |
 | 3       | 2       | false  |
 
-### Greater Than or Equal
+### Greater Than or Equal [Operation](../concepts/operation.md)
 
 _[Derived][der]._ Returns true when `compare(a, b)` is not [Less][or-less].
 
@@ -69,10 +69,10 @@ _[Derived][der]._ Returns true when `compare(a, b)` is not [Less][or-less].
 | 3       | 2       | true   |
 
 [bool]: boolean.md
-[der]: ../../language.md#derived
+[der]: ../concepts/operation.md#derived
 [eq]: equality.md
 [or]: ordering-relation.md
 [or-equal]: ordering-relation.md#equal
 [or-greater]: ordering-relation.md#greater
 [or-less]: ordering-relation.md#less
-[req]: ../../language.md#required
+[req]: ../concepts/operation.md#required

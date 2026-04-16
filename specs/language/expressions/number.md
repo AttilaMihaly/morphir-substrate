@@ -6,7 +6,7 @@ The Number [type class](../concepts/type-class.md) defines operations for numeri
 
 ## Operations
 
-### Addition
+### Addition [Operation](../concepts/operation.md)
 
 Returns the sum of two numbers.
 
@@ -18,7 +18,7 @@ Returns the sum of two numbers.
 | -1      | 1       | 0      |
 | 0       | 0       | 0      |
 
-### Subtraction
+### Subtraction [Operation](../concepts/operation.md)
 
 Returns the difference of two numbers.
 
@@ -30,7 +30,7 @@ Returns the difference of two numbers.
 | 1       | 1       | 0      |
 | 0       | 3       | -3     |
 
-### Multiplication
+### Multiplication [Operation](../concepts/operation.md)
 
 Returns the product of two numbers.
 
@@ -42,7 +42,7 @@ Returns the product of two numbers.
 | -2      | 3       | -6     |
 | 0       | 5       | 0      |
 
-### Division
+### Division [Operation](../concepts/operation.md)
 
 Returns the quotient of two numbers. Precondition: divisor must not be zero; the result is undefined otherwise.
 
@@ -54,7 +54,7 @@ Returns the quotient of two numbers. Precondition: divisor must not be zero; the
 | 7       | 2       | 3.5    |
 | 0       | 5       | 0      |
 
-### Negation
+### Negation [Operation](../concepts/operation.md)
 
 Returns the additive inverse of a number such that `a + negate(a) == 0`.
 
@@ -66,9 +66,9 @@ Returns the additive inverse of a number such that `a + negate(a) == 0`.
 | -3    | 3      |
 | 0     | 0      |
 
-### Absolute Value
+### Absolute Value [Operation](../concepts/operation.md)
 
-Returns the non-negative magnitude of a number. Equal to the number itself when non-negative, and its [negation](#negation) otherwise.
+Returns the non-negative magnitude of a number. Equal to the number itself when non-negative, and its [negation](#negation-operation) otherwise.
 
 #### Test cases
 
@@ -78,7 +78,7 @@ Returns the non-negative magnitude of a number. Equal to the number itself when 
 | -3    | 3      |
 | 0     | 0      |
 
-### Modulus
+### Modulus [Operation](../concepts/operation.md)
 
 Returns the remainder after dividing the first number by the second. Precondition: divisor must not be zero.
 

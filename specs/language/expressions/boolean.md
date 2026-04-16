@@ -11,7 +11,7 @@ The Boolean type represents a fundamental data type with two distinct member val
 
 ## Operations
 
-### NOT
+### NOT [Operation](../concepts/operation.md)
 
 Inverts the value of a Boolean.
 
@@ -22,7 +22,7 @@ Inverts the value of a Boolean.
 | true  | false  |
 | false | true   |
 
-### AND
+### AND [Operation](../concepts/operation.md)
 
 Returns true if and only if both inputs are true.
 
@@ -35,7 +35,7 @@ Returns true if and only if both inputs are true.
 | false   | true    | false  |
 | false   | false   | false  |
 
-### OR
+### OR [Operation](../concepts/operation.md)
 
 Returns true if at least one input is true.
 
@@ -48,7 +48,7 @@ Returns true if at least one input is true.
 | false   | true    | true   |
 | false   | false   | false  |
 
-### XOR
+### XOR [Operation](../concepts/operation.md)
 
 Returns true if exactly one input is true.
 
@@ -61,7 +61,7 @@ Returns true if exactly one input is true.
 | false   | true    | true   |
 | false   | false   | false  |
 
-### IMPLIES
+### IMPLIES [Operation](../concepts/operation.md)
 
 Returns false only when the antecedent is true and the consequent is false.
 
@@ -74,7 +74,7 @@ Returns false only when the antecedent is true and the consequent is false.
 | false   | true    | true   |
 | false   | false   | true   |
 
-### If-Then-Else
+### If-Then-Else [Operation](../concepts/operation.md)
 
 Evaluates to the then-value when the condition is `true`, and to the else-value when the condition is `false`. The condition must be a Boolean.
 

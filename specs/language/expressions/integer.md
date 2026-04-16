@@ -21,7 +21,7 @@ Represents whole numbers, optionally with fixed precision and signedness. Used f
 
 ## Integer-Specific Operations
 
-### Integer Division (Required)
+### Integer Division (Required) [Operation](../concepts/operation.md)
 
 Divides one integer by another, discarding any remainder. The result is the greatest integer less than or equal to the exact quotient (floor division).
 
@@ -38,7 +38,7 @@ Divides one integer by another, discarding any remainder. The result is the grea
 | 5        | 5       | 1      |
 | 0        | 3       | 0      |
 
-### Remainder (Required)
+### Remainder (Required) [Operation](../concepts/operation.md)
 
 Returns the remainder after integer division.
 

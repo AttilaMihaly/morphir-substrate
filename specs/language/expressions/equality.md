@@ -8,9 +8,9 @@ The Equality [type class](../concepts/type-class.md) defines operations for comp
 
 All operations return a [Boolean](boolean.md) value.
 
-### Equal
+### Equal [Operation](../concepts/operation.md)
 
-_[Required](../../language.md#required)._ Returns true if both values are the same. Must be implemented by any type that instances this type class.
+_[Required](../concepts/operation.md#required)._ Returns true if both values are the same. Must be implemented by any type that instances this type class.
 
 #### Test cases
 
@@ -21,9 +21,9 @@ _[Required](../../language.md#required)._ Returns true if both values are the sa
 | false   | true    | false  |
 | false   | false   | true   |
 
-### Not Equal
+### Not Equal [Operation](../concepts/operation.md)
 
-_[Derived](../../language.md#derived)._ Returns true if values are different. Defined as [NOT](boolean.md#not)`(a == b)`; does not need to be separately implemented.
+_[Derived](../concepts/operation.md#derived)._ Returns true if values are different. Defined as [NOT](boolean.md#not-operation)`(a == b)`; does not need to be separately implemented.
 
 #### Test cases
 

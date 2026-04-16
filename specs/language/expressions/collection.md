@@ -35,7 +35,7 @@ Type: [Integer][int], optional. The maximum number of elements the collection ma
 
 ## Operations
 
-### Size
+### Size [Operation](../concepts/operation.md)
 
 _[Required][req]._ Returns the number of elements in the collection.
 
@@ -48,9 +48,9 @@ _[Required][req]._ Returns the number of elements in the collection.
 | [1, 2, 3]  | 3      |
 | [1, 1, 2]  | 3      |
 
-### Is Empty
+### Is Empty [Operation](../concepts/operation.md)
 
-_[Derived][der]._ Returns [Boolean][bool] `true` if the collection contains no elements. Defined as [Size](#size) equal to zero.
+_[Derived][der]._ Returns [Boolean][bool] `true` if the collection contains no elements. Defined as [Size](#size-operation) equal to zero.
 
 #### Test cases
 
@@ -60,7 +60,7 @@ _[Derived][der]._ Returns [Boolean][bool] `true` if the collection contains no e
 | [1]        | false  |
 | [1, 2, 3]  | false  |
 
-### Contains
+### Contains [Operation](../concepts/operation.md)
 
 _[Required][req]._ Precondition: element type implements [Equality][eq]. Returns [Boolean][bool] `true` if any element in the collection compares [Equal][eq-equal] to the given value.
 
@@ -73,7 +73,7 @@ _[Required][req]._ Precondition: element type implements [Equality][eq]. Returns
 | []         | 1     | false  |
 | [1, 1, 2]  | 1     | true   |
 
-### Map
+### Map [Operation](../concepts/operation.md)
 
 _[Required][req]._ Returns a new collection of the same multiplicity and iteration order containing the result of applying a given function to each element. The output cardinality equals the input cardinality.
 
@@ -85,7 +85,7 @@ _[Required][req]._ Returns a new collection of the same multiplicity and iterati
 | []         | add 1 to element | []        |
 | [2, 2, 3]  | add 1 to element | [3, 3, 4] |
 
-### Filter
+### Filter [Operation](../concepts/operation.md)
 
 _[Required][req]._ Returns a new collection containing only the elements for which a given predicate returns [Boolean][bool] `true`, preserving multiplicity and iteration order.
 
@@ -98,7 +98,7 @@ _[Required][req]._ Returns a new collection containing only the elements for whi
 | []         | any element            | []     |
 | [1, 1, 2]  | element less than 2    | [1, 1] |
 
-### Distinct
+### Distinct [Operation](../concepts/operation.md)
 
 _[Required][req]._ Precondition: element type implements [Equality][eq]. Returns a new collection with duplicates removed so that no two elements compare [Equal][eq-equal]. The resulting collection has multiplicity **unique**.
 
@@ -113,7 +113,7 @@ When iteration order is **insertion** or **key**, the first occurrence of each d
 | []           | []        |
 | [3, 1, 2, 1] | [3, 1, 2] |
 
-### Union
+### Union [Operation](../concepts/operation.md)
 
 _[Required][req]._ Precondition: element type implements [Equality][eq]. Returns a collection containing all elements from either collection.
 
@@ -129,7 +129,7 @@ _[Required][req]._ Precondition: element type implements [Equality][eq]. Returns
 | []           | [3]          | [3]             |
 | []           | []           | []              |
 
-### Intersect
+### Intersect [Operation](../concepts/operation.md)
 
 _[Required][req]._ Precondition: element type implements [Equality][eq]. Returns a collection containing only elements that appear in both collections.
 
@@ -145,7 +145,7 @@ _[Required][req]._ Precondition: element type implements [Equality][eq]. Returns
 | []           | [1]          | []              |
 | [1, 2]       | []           | []              |
 
-### Difference
+### Difference [Operation](../concepts/operation.md)
 
 _[Required][req]._ Precondition: element type implements [Equality][eq]. Returns a collection containing elements from the first collection that do not appear in the second.
 
@@ -161,7 +161,7 @@ _[Required][req]._ Precondition: element type implements [Equality][eq]. Returns
 | []           | [1]          | []              |
 | [1, 2, 3]    | []           | [1, 2, 3]       |
 
-### Sort By
+### Sort By [Operation](../concepts/operation.md)
 
 _[Required][req]._ Precondition: a key function and a [Compare][compare] expression over the key type are provided. Returns a new collection with elements ordered by the key in ascending order. The resulting collection has iteration order **key**. Tie-breaking is stable: elements with equal keys retain their relative input order.
 
@@ -174,9 +174,9 @@ _[Required][req]._ Precondition: a key function and a [Compare][compare] express
 | []             | element itself          | []             |
 | [(b,1), (a,2)] | first component of pair | [(a,2), (b,1)] |
 
-### Then By
+### Then By [Operation](../concepts/operation.md)
 
-_[Derived][der]._ Precondition: a preceding [Sort By](#sort-by) or Then By has established a primary key ordering; a secondary key function and [Compare][compare] expression over the secondary key type are provided. Returns a new collection where elements with equal primary keys are further ordered by the secondary key. Tie-breaking on the secondary key is stable. Defined in terms of [Sort By](#sort-by) applied to a composite key that lexicographically combines the primary and secondary keys.
+_[Derived][der]._ Precondition: a preceding [Sort By](#sort-by-operation) or Then By has established a primary key ordering; a secondary key function and [Compare][compare] expression over the secondary key type are provided. Returns a new collection where elements with equal primary keys are further ordered by the secondary key. Tie-breaking on the secondary key is stable. Defined in terms of [Sort By](#sort-by-operation) applied to a composite key that lexicographically combines the primary and secondary keys.
 
 #### Test cases
 
@@ -185,7 +185,7 @@ _[Derived][der]._ Precondition: a preceding [Sort By](#sort-by) or Then By has e
 | [(a,2), (a,1), (b,1)] | first component of pair | second component of pair | [(a,1), (a,2), (b,1)] |
 | [(b,2), (a,1), (a,2)] | first component of pair | second component of pair | [(a,1), (a,2), (b,2)] |
 
-### Min
+### Min [Operation](../concepts/operation.md)
 
 _[Required][req]._ Precondition: element type implements [Ordering][ord]; minimum cardinality ≥ 1. Returns the smallest element according to [Compare][compare]. If multiple elements are [Equal][or-equal], any one of them may be returned.
 
@@ -197,7 +197,7 @@ _[Required][req]._ Precondition: element type implements [Ordering][ord]; minimu
 | [5]        | 5      |
 | [1, 1, 2]  | 1      |
 
-### Max
+### Max [Operation](../concepts/operation.md)
 
 _[Required][req]._ Precondition: element type implements [Ordering][ord]; minimum cardinality ≥ 1. Returns the largest element according to [Compare][compare]. If multiple elements are [Equal][or-equal], any one of them may be returned.
 
@@ -209,9 +209,9 @@ _[Required][req]._ Precondition: element type implements [Ordering][ord]; minimu
 | [5]        | 5      |
 | [1, 2, 2]  | 2      |
 
-### Min Or None
+### Min Or None [Operation](../concepts/operation.md)
 
-_[Derived][der]._ Precondition: element type implements [Ordering][ord]. Returns the smallest element if the collection is non-empty, or an absent value otherwise. Defined in terms of [Is Empty](#is-empty) and [Min](#min).
+_[Derived][der]._ Precondition: element type implements [Ordering][ord]. Returns the smallest element if the collection is non-empty, or an absent value otherwise. Defined in terms of [Is Empty](#is-empty-operation) and [Min](#min-operation).
 
 #### Test cases
 
@@ -221,9 +221,9 @@ _[Derived][der]._ Precondition: element type implements [Ordering][ord]. Returns
 | [5]        | 5      |
 | []         | none   |
 
-### Max Or None
+### Max Or None [Operation](../concepts/operation.md)
 
-_[Derived][der]._ Precondition: element type implements [Ordering][ord]. Returns the largest element if the collection is non-empty, or an absent value otherwise. Defined in terms of [Is Empty](#is-empty) and [Max](#max).
+_[Derived][der]._ Precondition: element type implements [Ordering][ord]. Returns the largest element if the collection is non-empty, or an absent value otherwise. Defined in terms of [Is Empty](#is-empty-operation) and [Max](#max-operation).
 
 #### Test cases
 
@@ -233,7 +233,7 @@ _[Derived][der]._ Precondition: element type implements [Ordering][ord]. Returns
 | [5]        | 5      |
 | []         | none   |
 
-### Reduce
+### Reduce [Operation](../concepts/operation.md)
 
 _[Required][req]._ Precondition: minimum cardinality ≥ 1. Combines all elements using a binary associative function without an initial accumulator, returning a single value of the same type.
 
@@ -245,9 +245,9 @@ _[Required][req]._ Precondition: minimum cardinality ≥ 1. Combines all element
 | [5]        | sum of two values | 5      |
 | [2, 3, 4]  | max of two values | 4      |
 
-### Reduce Or None
+### Reduce Or None [Operation](../concepts/operation.md)
 
-_[Derived][der]._ Like [Reduce](#reduce) but returns an absent value when the collection is empty. Defined in terms of [Is Empty](#is-empty) and [Reduce](#reduce).
+_[Derived][der]._ Like [Reduce](#reduce-operation) but returns an absent value when the collection is empty. Defined in terms of [Is Empty](#is-empty-operation) and [Reduce](#reduce-operation).
 
 #### Test cases
 
@@ -257,9 +257,9 @@ _[Derived][der]._ Like [Reduce](#reduce) but returns an absent value when the co
 | [5]        | sum of two values | 5      |
 | []         | sum of two values | none   |
 
-### Sum
+### Sum [Operation](../concepts/operation.md)
 
-_[Derived][der]._ Precondition: element type implements [Number][num]. Returns the total of all elements. Defined as [Reduce](#reduce) with [Addition](number.md#addition) when the collection is non-empty, and zero otherwise.
+_[Derived][der]._ Precondition: element type implements [Number][num]. Returns the total of all elements. Defined as [Reduce](#reduce-operation) with [Addition](number.md#addition-operation) when the collection is non-empty, and zero otherwise.
 
 #### Test cases
 
@@ -270,9 +270,9 @@ _[Derived][der]._ Precondition: element type implements [Number][num]. Returns t
 | []         | 0      |
 | [2, 2, 2]  | 6      |
 
-### Average
+### Average [Operation](../concepts/operation.md)
 
-_[Derived][der]._ Precondition: element type implements [Number][num]; minimum cardinality ≥ 1. Returns the arithmetic mean of all elements. Defined as [Sum](#sum) divided by [Size](#size).
+_[Derived][der]._ Precondition: element type implements [Number][num]; minimum cardinality ≥ 1. Returns the arithmetic mean of all elements. Defined as [Sum](#sum-operation) divided by [Size](#size-operation).
 
 #### Test cases
 
@@ -289,12 +289,12 @@ Collection does not itself implement a [type class](../concepts/type-class.md). 
 [bool]: boolean.md
 [col-iter]: collection-iteration-order.md
 [col-mult]: collection-multiplicity.md
-[compare]: ordering.md#compare
-[der]: ../../language.md#derived
+[compare]: ordering.md#compare-operation
+[der]: ../concepts/operation.md#derived
 [eq]: equality.md
-[eq-equal]: equality.md#equal
+[eq-equal]: equality.md#equal-operation
 [int]: integer.md
 [num]: number.md
 [or-equal]: ordering-relation.md#equal
 [ord]: ordering.md
-[req]: ../../language.md#required
+[req]: ../concepts/operation.md#required

@@ -10,7 +10,7 @@ A [type class](../concepts/type-class.md) for [types](../concepts/type.md) suppo
 
 ## Operations
 
-### Division (Required)
+### Division (Required) [Operation](../concepts/operation.md)
 
 Divides one value by another, producing a fractional result. The result may be infinite or undefined (e.g., division by zero).
 

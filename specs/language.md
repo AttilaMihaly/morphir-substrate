@@ -6,25 +6,6 @@ This specification organizes the language into modular, human-readable markdown 
 
 ## [Expressions](language/expressions/)
 
-## Operations
-
-Each operation in a type class module has its own subsection containing:
-
-- A [Required](#required) or [Derived](#derived) marker.
-- A description of the operation's semantics.
-- A test cases subsection with a table of inputs and expected outputs providing full-coverage test cases.
-
-Heading depth is relative, not absolute. A test cases subsection must appear
-under the heading of its operation, but additional grouping sections may
-appear between any structural elements. The overall heading hierarchy of a
-module is flexible provided that relative containment relationships are
-preserved.
-
-Built-in operations have no implementation in the language itself unless they
-are [Derived](#derived). Their natural language description and test cases
-together serve as the authoritative semantic reference. Derived operations
-must reference the required operation(s) they are defined in terms of.
-
 ## Markdown Conventions
 
 ### Syntax Policy
@@ -113,18 +94,6 @@ it. In either case, every alternative-format fragment must carry a provenance
 reference --- a link or annotation that identifies the specification section
 or operation it belongs to.
 
-## Operation Markers
-
-Each operation in a type class is marked as one of the following:
-
-### Required
-
-The operation must be implemented by any type that instances the type class. It cannot be derived from other operations in the same type class.
-
-### Derived
-
-The operation has a default definition expressed in terms of one or more [Required](#required) operations. A type instancing the type class inherits this definition and does not need to implement it separately, though it may override it.
-
 ## User Modules
 
 User modules are markdown files that describe business logic using the language's building blocks. Business logic is expressed as nested lists:
@@ -136,12 +105,12 @@ This mirrors function application in a readable, non-syntactic form.
 
 ### Example
 
-- [Add](language/expressions/number.md#addition)
-  - [Multiply](language/expressions/number.md#multiplication)
+- [Add](language/expressions/number.md#addition-operation)
+  - [Multiply](language/expressions/number.md#multiplication-operation)
     - `unit_price`
     - `quantity`
   - `tax`
 
 This reads as: add the result of multiplying `unit_price` by `quantity` to `tax`.
 
-Leaf values (e.g., `unit_price`) refer to named inputs or constants defined elsewhere in the user module. A [Boolean](language/expressions/boolean.md) value can be used as a condition in the [If-Then-Else](language/expressions/boolean.md#if-then-else) control-flow construct.
+Leaf values (e.g., `unit_price`) refer to named inputs or constants defined elsewhere in the user module. A [Boolean](language/expressions/boolean.md) value can be used as a condition in the [If-Then-Else](language/expressions/boolean.md#if-then-else-operation) control-flow construct.

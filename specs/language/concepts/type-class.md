@@ -8,8 +8,8 @@ that type class.
 ## Operations
 
 Each type class declares one or more operations. Every operation is marked as
-either [Required](../../language.md#required) or
-[Derived](../../language.md#derived).
+either [Required](operation.md#required) or
+[Derived](operation.md#derived).
 
 - A **required** operation must be implemented by every type that instances
   the type class.

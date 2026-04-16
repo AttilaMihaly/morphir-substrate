@@ -10,7 +10,7 @@ during iteration of a [Collection](collection.md).
 - **none** — no iteration order is guaranteed.
 - **insertion** — elements are visited in the order they were added.
 - **key** — elements are visited in ascending order defined by a
-  [Compare](ordering.md#compare) expression over a key derived from each
+  [Compare](ordering.md#compare-operation) expression over a key derived from each
   element, equivalent to SQL `ORDER BY`.
 
 ## Attributes
