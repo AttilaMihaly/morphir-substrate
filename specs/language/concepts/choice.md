@@ -67,11 +67,11 @@ be supplied as absent.
 
 #### Test cases
 
-| Choice type      | Variant | Field values              | Output          |
+| Choice type | Variant | Field values | Output |
 | ---------------- | ------- | ------------------------- | --------------- |
-| `Maturity Bucket` | `Open`  | —                         | `Open`          |
-| `Maturity Bucket` | `Range` | `from_days: 2, to_days: 7`| `Range(2, 7)`   |
-| `Maturity Bucket` | `Beyond`| `from_days: 365`          | `Beyond(365)`   |
+| `Maturity Bucket` | `Open` | — | `Open` |
+| `Maturity Bucket` | `Range` | `from_days: 2, to_days: 7` | `Range(2, 7)` |
+| `Maturity Bucket` | `Beyond` | `from_days: 365` | `Beyond(365)` |
 
 ### Is Variant [Operation](operation.md)
 

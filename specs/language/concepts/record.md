@@ -34,8 +34,8 @@ access: fields are always addressed by name, never by position.
 
 The fields are typically presented as a table:
 
-| Name    | Type                          | Optionality | Description                  |
-| ------- | ----------------------------- | ----------- | ---------------------------- |
+| Name    | Type                               | Optionality | Description                  |
+| ------- | ---------------------------------- | ----------- | ---------------------------- |
 | `name`  | [String](../expressions/string.md) | required    | The customer's display name. |
 | `email` | [String](../expressions/string.md) | optional    | Contact email, if supplied.  |
 
