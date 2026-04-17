@@ -327,3 +327,22 @@ a **tight feedback loop**: edit a rule, observe the ripple effect across all
 data immediately, and confirm or revert the change before it propagates
 further. The impact analysis operates on the same markdown-native interface
 as the live debugger, requiring no additional tooling or context switch.
+
+---
+
+## 13. Versioning
+
+Specification corpora evolve over time as the regulations or domains they
+codify are amended or superseded. Substrate treats this as an ordinary
+software versioning problem rather than a temporal modelling problem:
+corpora are versioned using the same mechanisms used for source code and
+library packages --- git tags, semantic version identifiers, package-manager
+releases. A given corpus at a given version is the authoritative
+specification for the regulatory version it codifies; historical reporting
+is served by checking out the appropriate corpus version.
+
+This keeps the specification language itself free of effective-date
+machinery. Date-sensitive behaviour within a single corpus version, when it
+occurs, is expressed using the ordinary constructs --- for example, a
+[Decision Table](language/concepts/decision-table.md) with a reporting-date
+column --- rather than through a dedicated versioning construct.
