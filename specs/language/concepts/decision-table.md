@@ -124,6 +124,32 @@ Given values for every input:
 4. If no row matches and no `otherwise` row is present, evaluation is
    undefined.
 
+## Invocation
+
+A decision table is invoked from a user module exactly like an
+[operation](operation.md): the table's heading link is the parent item
+of a nested list, and each child item supplies one of the table's
+inputs in the same order they are declared. The result is the table's
+output. When a table declares a single output, the invocation yields
+that output directly; when it declares multiple outputs, the invocation
+yields a record whose fields are the declared output names.
+
+For example, given the table declared below, the retail outflow rate
+for a classified deposit row is obtained as:
+
+```markdown
+- [Retail Outflow Rate](retail-outflow-rate.md)
+  - `row.counterparty`
+  - `row.insured`
+  - `row.account_type`
+  - `row.relationship`
+```
+
+This reads the same as any other operation call and is composable with
+arithmetic and collection operations — for example, multiplying the
+returned rate by an amount, or mapping the table over a collection of
+rows.
+
 ## Relationship to If-Then-Else
 
 A decision table with two rules and one output is semantically equivalent
