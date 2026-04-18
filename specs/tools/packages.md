@@ -1,15 +1,43 @@
 # Packages
 
 A substrate package is a directory of markdown files (and any accompanying
-alternative-format artifacts) intended to be reused by other corpora. The
-package system exists so that cross-repository markdown links resolve
-reliably without extending markdown itself: dependencies are vendored into
-a conventional directory, and authors write ordinary relative links through
-that directory.
+alternative-format artifacts) that declares its identity and dependencies
+in a manifest. The package system exists so that cross-repository markdown
+links resolve reliably without extending markdown itself: dependencies are
+vendored into a conventional directory, and authors write ordinary relative
+links through that directory.
 
 No custom link protocol is introduced. No build step rewrites author-written
 markdown. Tooling provides installation, version resolution, and link
 validation; everything else is plain markdown.
+
+## Package Kinds
+
+Every package declares one of two kinds, mirroring the distinction Elm
+and Cargo draw between reusable code and end deliverables:
+
+- **Library** — a package intended to be depended on by other packages.
+  It contributes types, concepts, operations, or any other reusable
+  specification material. The substrate language specification itself
+  is distributed as a library.
+- **Corpus** — a leaf package that assembles libraries into an
+  authoritative body of specification for a specific domain — an
+  organization's regulatory model, a particular product's rule set, a
+  demonstrative example. A corpus is not itself depended on; it is the
+  consumer at the bottom of the dependency tree.
+
+Both kinds use the same manifest, directory layout, and link
+conventions. They differ only in two expectations:
+
+- A corpus must contain a `README.md` at its root that serves as the
+  entry point — the first document a reader opens. It orients the
+  reader to the corpus's scope, reading order, and conventions, and
+  links to everything else. Libraries are encouraged to follow the
+  same convention but are not required to; a library's natural entry
+  point is often the specification file a consumer links to directly.
+- A corpus typically omits `version` from its manifest, because a
+  corpus is generally not published for others to depend on. A library
+  must declare `version` to be installable.
 
 ## Package Identity
 
@@ -52,14 +80,16 @@ The manifest is `substrate.toml` at the corpus root:
 ```toml
 [package]
 name = "@MyOrg/fr2052a-lcr"
-version = "0.1.0"
+kind = "corpus"
 
 [dependencies]
 "@AttilaMihaly/morphir-substrate" = "^0.1.0"
 ```
 
-The `[package]` table declares this corpus's own identity and version.
-A corpus that is not itself published may omit `version`.
+The `[package]` table declares this package's own identity. The `kind`
+field is required and takes one of the two values defined in
+[Package Kinds](#package-kinds): `"library"` or `"corpus"`. A library
+additionally declares `version`; a corpus typically omits it.
 
 The `[dependencies]` table lists each required package and a semver range.
 Keys are the full scoped package name; values are semver ranges following
@@ -151,7 +181,8 @@ integrity or semver constraints at this stage.
 
 ### `substrate publish`
 
-Prepares the corpus for release:
+Prepares a library for release. Aborts if the package's `kind` is
+`corpus`, since corpora are not published for others to depend on.
 
 1. Confirms `substrate.toml` and `substrate.lock` are committed and the
    working tree is clean.
