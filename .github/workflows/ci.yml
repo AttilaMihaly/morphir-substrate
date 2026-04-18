@@ -29,3 +29,7 @@ jobs:
             echo "=== $f ==="
             node dist/cli.js verify "$f"
           done
+
+      - name: Validate FR 2052a / LCR corpus
+        working-directory: examples/fr2052a-lcr
+        run: node ../../dist/cli.js validate

@@ -4,9 +4,10 @@
  */
 import { stat } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
-import type { Root, Heading, Link, Definition } from "mdast";
+import type { Root, Definition } from "mdast";
 import type { Diagnostic } from "../types.js";
-import { collectLinks, collectAnchors, slugify, nodeText } from "../language/mdast-utils.js";
+import { collectLinks, collectAnchors } from "../language/mdast-utils.js";
+import type { LinkRef } from "../language/mdast-utils.js";
 
 /**
  * Check all internal links in the document.
@@ -37,7 +38,19 @@ export async function checkReferences(
     const links = collectLinks(root);
 
     for (const link of links) {
-        const url = link.url;
+        const url = resolveLinkUrl(link, definitions);
+        if (url === null) {
+            diagnostics.push({
+                stage: "references",
+                severity: "error",
+                file: filePath,
+                ...(link.line !== undefined ? { line: link.line } : {}),
+                ...(link.column !== undefined ? { column: link.column } : {}),
+                message: `Undefined link reference: [${link.kind === "linkReference" ? link.identifier : link.text}]`,
+                ruleId: "undefined-reference",
+            });
+            continue;
+        }
 
         // Skip external URLs and mailto
         if (/^https?:\/\//.test(url) || url.startsWith("mailto:")) continue;
@@ -54,8 +67,8 @@ export async function checkReferences(
                     stage: "references",
                     severity: "error",
                     file: filePath,
-                    line: link.line,
-                    column: link.column,
+                    ...(link.line !== undefined ? { line: link.line } : {}),
+                    ...(link.column !== undefined ? { column: link.column } : {}),
                     message: `Anchor "#${anchor}" not found in current file`,
                     ruleId: "broken-anchor",
                 });
@@ -76,8 +89,8 @@ export async function checkReferences(
                         stage: "references",
                         severity: "error",
                         file: filePath,
-                        line: link.line,
-                        column: link.column,
+                        ...(link.line !== undefined ? { line: link.line } : {}),
+                        ...(link.column !== undefined ? { column: link.column } : {}),
                         message: `Link target not found: ${filePart}`,
                         ruleId: "broken-link",
                     });
@@ -93,8 +106,8 @@ export async function checkReferences(
                         stage: "references",
                         severity: "error",
                         file: filePath,
-                        line: link.line,
-                        column: link.column,
+                        ...(link.line !== undefined ? { line: link.line } : {}),
+                        ...(link.column !== undefined ? { column: link.column } : {}),
                         message: `Anchor "#${anchor}" not found in ${filePart}`,
                         ruleId: "broken-anchor",
                     });
@@ -108,8 +121,8 @@ export async function checkReferences(
                     stage: "references",
                     severity: "error",
                     file: filePath,
-                    line: link.line,
-                    column: link.column,
+                    ...(link.line !== undefined ? { line: link.line } : {}),
+                    ...(link.column !== undefined ? { column: link.column } : {}),
                     message: `Link target not found: ${filePart}`,
                     ruleId: "broken-link",
                 });
@@ -118,6 +131,20 @@ export async function checkReferences(
     }
 
     return diagnostics;
+}
+
+/**
+ * Return the effective URL of a link — either its inline URL or the
+ * URL of the definition it references. Returns null if the reference
+ * is undefined.
+ */
+function resolveLinkUrl(
+    link: LinkRef,
+    definitions: ReadonlyMap<string, string>,
+): string | null {
+    if (link.kind === "link") return link.url;
+    const def = definitions.get(link.identifier);
+    return def ?? null;
 }
 
 async function fileExists(path: string): Promise<boolean> {

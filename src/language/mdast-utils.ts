@@ -200,7 +200,13 @@ export function parseCellValue(raw: string): Value {
 // Link collection
 // ---------------------------------------------------------------------------
 
-/** Recursively collect all Link nodes from an MDAST tree. */
+/**
+ * Recursively collect every link-like node from an MDAST tree — both
+ * inline `link` nodes and reference-style `linkReference` nodes.
+ *
+ * Reference-style links are returned with their `identifier` so callers
+ * can resolve them via the document's `definition` nodes.
+ */
 export function collectLinks(node: Root | Content): readonly LinkRef[] {
     const links: LinkRef[] = [];
     function walk(n: unknown): void {
@@ -209,10 +215,24 @@ export function collectLinks(node: Root | Content): readonly LinkRef[] {
         if (obj["type"] === "link") {
             const link = n as unknown as Link;
             links.push({
+                kind: "link",
                 url: link.url,
                 text: nodeText(link),
                 ...(link.position?.start.line !== undefined ? { line: link.position.start.line } : {}),
                 ...(link.position?.start.column !== undefined ? { column: link.position.start.column } : {}),
+            });
+        } else if (obj["type"] === "linkReference") {
+            const identifier =
+                typeof obj["identifier"] === "string" ? (obj["identifier"] as string) : "";
+            const position = obj["position"] as
+                | { start?: { line?: number; column?: number } }
+                | undefined;
+            links.push({
+                kind: "linkReference",
+                identifier,
+                text: nodeText(n),
+                ...(position?.start?.line !== undefined ? { line: position.start.line } : {}),
+                ...(position?.start?.column !== undefined ? { column: position.start.column } : {}),
             });
         }
         const children = obj["children"];
@@ -226,12 +246,21 @@ export function collectLinks(node: Root | Content): readonly LinkRef[] {
     return links;
 }
 
-interface LinkRef {
-    readonly url: string;
-    readonly text: string;
-    readonly line?: number | undefined;
-    readonly column?: number | undefined;
-}
+export type LinkRef =
+    | {
+          readonly kind: "link";
+          readonly url: string;
+          readonly text: string;
+          readonly line?: number | undefined;
+          readonly column?: number | undefined;
+      }
+    | {
+          readonly kind: "linkReference";
+          readonly identifier: string;
+          readonly text: string;
+          readonly line?: number | undefined;
+          readonly column?: number | undefined;
+      };
 
 // ---------------------------------------------------------------------------
 // Heading collection for anchor building
