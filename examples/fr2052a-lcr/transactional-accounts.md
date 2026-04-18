@@ -30,14 +30,14 @@ omitted in this MVP slice.
 
 ## Fields
 
-| Name              | Type                                           | Optionality | Description                                                            |
-| ----------------- | ---------------------------------------------- | ----------- | ---------------------------------------------------------------------- |
-| `report_date`     | [Date](../../specs/language/expressions/date.md) | required    | The FR 2052a reporting date as of which balances are measured.         |
+| Name              | Type                                                   | Optionality | Description                                                            |
+| ----------------- | ------------------------------------------------------ | ----------- | ---------------------------------------------------------------------- |
+| `report_date`     | [Date](../../specs/language/expressions/date.md)       | required    | The FR 2052a reporting date as of which balances are measured.         |
 | `amount`          | [Decimal](../../specs/language/expressions/decimal.md) | required    | Unpaid principal balance, in reporting currency units.                 |
-| `counterparty`    | [Counterparty](counterparty.md)                | required    | The party on the other side of the deposit position.                   |
-| `account_type`    | [Account Type](account-type.md)                | required    | Whether the deposit is held in a transactional account.                |
-| `relationship`    | [Relationship](relationship.md)                | required    | Whether the counterparty has an established relationship.              |
-| `maturity_bucket` | [Maturity Bucket](maturity-bucket.md)          | required    | Remaining contractual maturity, bucketed.                              |
+| `counterparty`    | [Counterparty](counterparty.md)                        | required    | The party on the other side of the deposit position.                   |
+| `account_type`    | [Account Type](account-type.md)                        | required    | Whether the deposit is held in a transactional account.                |
+| `relationship`    | [Relationship](relationship.md)                        | required    | Whether the counterparty has an established relationship.              |
+| `maturity_bucket` | [Maturity Bucket](maturity-bucket.md)                  | required    | Remaining contractual maturity, bucketed.                              |
 | `insured`         | [Boolean](../../specs/language/expressions/boolean.md) | required    | `true` when the deposit is covered by deposit insurance up to limit.   |
 
 ## Type Class Instances

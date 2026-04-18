@@ -48,11 +48,11 @@ classification fields, then multiplied by the row's `amount`.
 
 #### Test cases
 
-| `row`                                                                                                                          | `row_outflow` |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `{ amount: 1000, counterparty: Retail, insured: true, account_type: Transactional, relationship: Established, ... }`           | 30            |
-| `{ amount: 1000, counterparty: Retail, insured: true, account_type: Non-Transactional, relationship: None, ... }`              | 100           |
-| `{ amount: 2500, counterparty: Retail, insured: false, account_type: Transactional, relationship: Established, ... }`          | 250           |
+| `row`                                                                                                                           | `row_outflow` |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `{ amount: 1000, counterparty: Retail, insured: true, account_type: Transactional, relationship: Established, ... }`            | 30            |
+| `{ amount: 1000, counterparty: Retail, insured: true, account_type: Non-Transactional, relationship: None, ... }`               | 100           |
+| `{ amount: 2500, counterparty: Retail, insured: false, account_type: Transactional, relationship: Established, ... }`           | 250           |
 | `{ amount: 500, counterparty: Small Business, insured: true, account_type: Non-Transactional, relationship: Established, ... }` | 15            |
 
 ### `per_row_outflows`
@@ -78,7 +78,7 @@ outflows.
 | `[]`                                                                                                                                                                                    | 0               |
 | `[{ amount: 1000, Retail, insured, Transactional, Established }]`                                                                                                                       | 30              |
 | `[{ amount: 1000, Retail, insured, Transactional, Established }, { amount: 1000, Retail, insured, Non-Transactional, None }]`                                                           | 130             |
-| `[{ amount: 2500, Retail, uninsured, Transactional, Established }, { amount: 500, Small Business, insured, Non-Transactional, Established }]`                                          | 265             |
+| `[{ amount: 2500, Retail, uninsured, Transactional, Established }, { amount: 500, Small Business, insured, Non-Transactional, Established }]`                                           | 265             |
 
 [col]: ../../specs/language/expressions/collection.md
 [cfr-32a]: https://www.ecfr.gov/current/title-12/part-249/section-249.32#p-249.32(a)

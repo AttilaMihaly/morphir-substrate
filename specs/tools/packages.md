@@ -25,8 +25,7 @@ of `^0.1.0`. Tags without a leading `v` are accepted.
 
 A corpus that depends on one or more packages has the following layout:
 
-```
-my-corpus/
+```text
 ├── substrate.toml               # manifest
 ├── substrate.lock               # lockfile
 ├── substrate/
