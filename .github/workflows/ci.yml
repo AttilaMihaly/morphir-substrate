@@ -20,4 +20,12 @@ jobs:
 
       - run: npm run lint
 
+      - run: npm test
 
+      - name: Verify FR 2052a / LCR example
+        run: |
+          set -e
+          for f in examples/fr2052a-lcr/*.md; do
+            echo "=== $f ==="
+            node dist/cli.js verify "$f"
+          done

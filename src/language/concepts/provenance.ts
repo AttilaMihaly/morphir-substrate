@@ -31,7 +31,7 @@ export function hasSourceLinks(body: readonly Content[]): boolean {
 function containsLink(node: unknown): boolean {
     if (typeof node !== "object" || node === null) return false;
     const obj = node as Record<string, unknown>;
-    if (obj["type"] === "link") return true;
+    if (obj["type"] === "link" || obj["type"] === "linkReference") return true;
     const children = obj["children"];
     if (Array.isArray(children)) {
         for (const child of children) {

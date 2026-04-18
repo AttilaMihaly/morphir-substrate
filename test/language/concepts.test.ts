@@ -192,6 +192,18 @@ describe("isProvenanceHeading / hasSourceLinks", () => {
         expect(hasSourceLinks(body)).toBe(true);
     });
 
+    it("detects reference-style source links in body", () => {
+        const md = `### [Provenance](../concepts/provenance.md)
+
+- [FR 2052a form][fr2052a-form]
+
+[fr2052a-form]: http://example.com
+`;
+        const root = parse(md);
+        const { body } = findHeadingAndBody(root, 3);
+        expect(hasSourceLinks(body)).toBe(true);
+    });
+
     it("reports missing source links", () => {
         const md = `### [Provenance](../concepts/provenance.md)
 
