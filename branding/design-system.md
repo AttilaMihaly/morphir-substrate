@@ -55,11 +55,11 @@ Derived from the tertiary, used sparingly.
 
 Substrate is an **LLM-native executable specification language** — the product is text. Type choices favor long-form reading and code legibility.
 
-| Role        | Family                                                                                   | Notes                                            |
-| ----------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| UI / body   | `"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`                      | Primary UI and prose font.                       |
+| Role        | Family                                                                                   | Notes                                                |
+| ----------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| UI / body   | `"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`                      | Primary UI and prose font.                           |
 | Display     | Same as body, heavier weights (600–700)                                                  | No separate display face — one family, many weights. |
-| Mono / code | `"JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`| Code blocks, spec editor.                        |
+| Mono / code | `"JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`| Code blocks, spec editor.                            |
 
 ### Type scale (1.250 – major third)
 
@@ -93,12 +93,12 @@ Substrate is an **LLM-native executable specification language** — the product
 
 ## Radii
 
-| Token         | Value  | Use                  |
-| ------------- | ------ | -------------------- |
-| `--radius-sm` | `4px`  | Inputs, small chips. |
-| `--radius-md` | `8px`  | Cards, buttons.      |
-| `--radius-lg` | `12px` | Panels, modals.      |
-| `--radius-pill` | `999px` | Pills, tags.       |
+| Token           | Value   | Use                  |
+| --------------- | ------- | -------------------- |
+| `--radius-sm`   | `4px`   | Inputs, small chips. |
+| `--radius-md`   | `8px`   | Cards, buttons.      |
+| `--radius-lg`   | `12px`  | Panels, modals.      |
+| `--radius-pill` | `999px` | Pills, tags.         |
 
 ## Elevation
 
